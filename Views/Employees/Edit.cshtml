@@ -1,0 +1,31 @@
+@model SEPMS.Domain.Entities.Employee
+
+@{
+    ViewData["Title"] = "Edit employee";
+}
+
+<div class="dept-hero">
+    <div>
+        <p class="dept-kicker">People</p>
+        <h1>Edit employee</h1>
+        <p class="dept-sub">Update details for @Model.Name.</p>
+    </div>
+    <a asp-action="Index" class="dept-btn dept-btn-ghost">Back to list</a>
+</div>
+
+<div class="dept-panel dept-panel-narrow">
+    <div class="dept-panel-body">
+        <form asp-action="Edit" method="post" class="dept-form">
+            <input type="hidden" asp-for="EmployeeId" />
+            <partial name="_EmployeeForm" />
+            <div class="dept-form-actions">
+                <button type="submit" class="dept-btn dept-btn-primary">Save changes</button>
+                <a asp-action="Index" class="dept-btn dept-btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SEPMS.styles.css" asp-append-version="true" />
+    @if (ViewData["PageTheme"] as string == "org")
+    {
+        <partial name="_DepartmentStyles" />
+    }
 </head>
-<body>
+@{
+    var isThemed = ViewData["PageTheme"] as string == "org";
+    var currentNav = ViewData["CurrentNav"] as string;
+}
+<body class="@(isThemed ? "dept-theme" : null)">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 @(isThemed ? "navbar-dark dept-nav" : "navbar-light bg-white")">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SEPMS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -21,23 +29,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @(isThemed ? null : "text-dark")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @(currentNav == "departments" ? "active" : (isThemed ? null : "text-dark"))" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentNav == "employees" ? "active" : (isThemed ? null : "text-dark"))" asp-area="" asp-controller="Employees" asp-action="Index">Employees</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(isThemed ? null : "text-dark")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="@(isThemed ? "dept-container" : "container")">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted @(isThemed ? "dept-footer" : null)">
         <div class="container">
             &copy; 2026 - SEPMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

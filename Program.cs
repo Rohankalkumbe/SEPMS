@@ -1,40 +1,48 @@
-using Microsoft.EntityFrameworkCore;
-using SEPMS.Data;
+using Microsoft.AspNetCore.DataProtection;
+using SEPMS.Application;
+using SEPMS.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add Database Services
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(
+        new DirectoryInfo(
+            Path.Combine(
+                builder.Environment.ContentRootPath,
+                "App_Data",
+                "DataProtection-Keys"
+            )
+        )
+    );
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddApplication();
+
+// This passes appsettings.json configuration,
+// including the SEPMS_DB connection string,
+// to the Infrastructure layer.
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
-
 
 app.Run();

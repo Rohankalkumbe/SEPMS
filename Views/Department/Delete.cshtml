@@ -1,0 +1,47 @@
+﻿@model SEPMS.Domain.Entities.Department
+
+@{
+    ViewData["Title"] = "Delete department";
+}
+
+<div class="dept-hero">
+    <div>
+        <p class="dept-kicker">Organization</p>
+        <h1>Delete department</h1>
+        <p class="dept-sub">This action cannot be undone.</p>
+    </div>
+    <a asp-action="Index" class="dept-btn dept-btn-ghost">Back to list</a>
+</div>
+
+<div class="dept-panel dept-panel-narrow">
+    <div class="dept-panel-body">
+        <div class="dept-warn">
+            Are you sure you want to delete <strong>@Model.DepartmentName</strong>?
+        </div>
+
+        <dl class="dept-details">
+            <div class="dept-detail">
+                <dt>Name</dt>
+                <dd>@Model.DepartmentName</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Code</dt>
+                <dd><span class="dept-code">@Model.DepartmentCode</span></dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Description</dt>
+                <dd>@(string.IsNullOrWhiteSpace(Model.Description) ? "—" : Model.Description)</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Status</dt>
+                <dd>@(Model.IsActive ? "Active" : "Inactive")</dd>
+            </div>
+        </dl>
+
+        <form asp-action="Delete" method="post" class="dept-form-actions">
+            <input type="hidden" asp-for="DepartmentId" />
+            <button type="submit" class="dept-btn dept-btn-danger">Delete department</button>
+            <a asp-action="Index" class="dept-btn dept-btn-outline">Cancel</a>
+        </form>
+    </div>
+</div>

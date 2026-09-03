@@ -1,34 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SEPMS.Data;
-using SEPMS.Models;
+using SEPMS.Application.Abstractions;
+using SEPMS.Domain.Entities;
 
 namespace SEPMS.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDepartmentService _departments;
 
-        public DepartmentController(ApplicationDbContext context)
+        public DepartmentController(IDepartmentService departments)
         {
-            _context = context;
+            _departments = departments;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? search, string? status, string? sort, string? dir, int page = 1, int pageSize = 10)
         {
-
-            var departments = _context.Departments.ToList();
-
-            return View(departments);
+            return View(_departments.GetPaged(search, status, sort, dir, page, pageSize));
         }
-
-        // Create a CRUD Operation
-
-
 
         public IActionResult Create()
         {
             return View();
-
         }
 
         [HttpPost]
@@ -36,14 +28,63 @@ namespace SEPMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Departments.Add(department);
-
-                _context.SaveChanges();
-
+                _departments.Create(department);
+                TempData["Success"] = "Department created.";
                 return RedirectToAction("Index");
             }
 
             return View(department);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var department = _departments.GetById(id.Value);
+            return department == null ? NotFound() : View(department);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_departments.Update(department))
+                {
+                    return NotFound();
+                }
+
+                TempData["Success"] = "Department updated.";
+                return RedirectToAction("Index");
+            }
+
+            return View(department);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var department = _departments.GetById(id.Value);
+            return department == null ? NotFound() : View(department);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int departmentId)
+        {
+            if (!_departments.Delete(departmentId))
+            {
+                return NotFound();
+            }
+
+            TempData["Success"] = "Department deleted.";
+            return RedirectToAction("Index");
         }
     }
 }

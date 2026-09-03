@@ -1,14 +1,14 @@
-﻿@model SEPMS.Domain.Entities.Department
+@model SEPMS.Domain.Entities.Employee
 
 @{
-    ViewData["Title"] = "New department";
+    ViewData["Title"] = "New employee";
 }
 
 <div class="dept-hero">
     <div>
-        <p class="dept-kicker">Organization</p>
-        <h1>New department</h1>
-        <p class="dept-sub">Add a department that employees can be assigned to.</p>
+        <p class="dept-kicker">People</p>
+        <h1>New employee</h1>
+        <p class="dept-sub">Add a person and assign them to a department.</p>
     </div>
     <a asp-action="Index" class="dept-btn dept-btn-ghost">Back to list</a>
 </div>
@@ -16,9 +16,9 @@
 <div class="dept-panel dept-panel-narrow">
     <div class="dept-panel-body">
         <form asp-action="Create" method="post" class="dept-form">
-            <partial name="_DepartmentForm" />
+            <partial name="_EmployeeForm" />
             <div class="dept-form-actions">
-                <button type="submit" class="dept-btn dept-btn-primary">Save department</button>
+                <button type="submit" class="dept-btn dept-btn-primary">Save employee</button>
                 <a asp-action="Index" class="dept-btn dept-btn-outline">Cancel</a>
             </div>
         </form>

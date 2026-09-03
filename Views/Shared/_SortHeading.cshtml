@@ -1,0 +1,13 @@
+@model (string Label, string Column, ListQuery Query)
+
+@{
+    var query = Model.Query;
+    var isCurrent = string.Equals(query.Sort, Model.Column, StringComparison.OrdinalIgnoreCase);
+    var marker = isCurrent ? (query.Dir == "desc" ? " ↓" : " ↑") : "";
+}
+
+<th>
+    <a class="dept-sort @(isCurrent ? "is-active" : null)"
+       asp-action="Index"
+       asp-all-route-data="query.Route(page: 1, sort: Model.Column, dir: query.NextDir(Model.Column))">@Model.Label@marker</a>
+</th>

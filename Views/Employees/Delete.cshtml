@@ -1,0 +1,55 @@
+@model SEPMS.Domain.Entities.Employee
+
+@{
+    ViewData["Title"] = "Delete employee";
+}
+
+<div class="dept-hero">
+    <div>
+        <p class="dept-kicker">People</p>
+        <h1>Delete employee</h1>
+        <p class="dept-sub">This action cannot be undone.</p>
+    </div>
+    <a asp-action="Index" class="dept-btn dept-btn-ghost">Back to list</a>
+</div>
+
+<div class="dept-panel dept-panel-narrow">
+    <div class="dept-panel-body">
+        <div class="dept-warn">
+            Are you sure you want to delete <strong>@Model.Name</strong>?
+        </div>
+
+        <dl class="dept-details">
+            <div class="dept-detail">
+                <dt>Name</dt>
+                <dd>@Model.Name</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Email</dt>
+                <dd>@Model.Email</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Phone</dt>
+                <dd>@(string.IsNullOrWhiteSpace(Model.Phone) ? "—" : Model.Phone)</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Department</dt>
+                <dd>@(Model.Department?.DepartmentName ?? "—")</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Job title</dt>
+                <dd>@Model.JobTitle</dd>
+            </div>
+            <div class="dept-detail">
+                <dt>Status</dt>
+                <dd>@(Model.IsActive ? "Active" : "Inactive")</dd>
+            </div>
+        </dl>
+
+        <form asp-action="Delete" method="post" class="dept-form-actions">
+            <input type="hidden" asp-for="EmployeeId" />
+            <button type="submit" class="dept-btn dept-btn-danger">Delete employee</button>
+            <a asp-action="Index" class="dept-btn dept-btn-outline">Cancel</a>
+        </form>
+    </div>
+</div>

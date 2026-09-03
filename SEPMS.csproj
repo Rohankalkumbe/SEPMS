@@ -7,16 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SEPMS.Domain\**" />
+    <Compile Remove="SEPMS.Application\**" />
+    <Compile Remove="SEPMS.Infrastructure\**" />
+    <Compile Remove="Migrations\**" />
+    <Content Remove="SEPMS.Domain\**" />
+    <Content Remove="SEPMS.Application\**" />
+    <Content Remove="SEPMS.Infrastructure\**" />
+    <EmbeddedResource Remove="SEPMS.Domain\**" />
+    <EmbeddedResource Remove="SEPMS.Application\**" />
+    <EmbeddedResource Remove="SEPMS.Infrastructure\**" />
+    <None Remove="SEPMS.Domain\**" />
+    <None Remove="SEPMS.Application\**" />
+    <None Remove="SEPMS.Infrastructure\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="SEPMS.Application\SEPMS.Application.csproj" />
+    <ProjectReference Include="SEPMS.Infrastructure\SEPMS.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.10" />
   </ItemGroup>
 
 </Project>

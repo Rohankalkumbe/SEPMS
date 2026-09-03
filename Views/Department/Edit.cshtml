@@ -1,24 +1,25 @@
 ﻿@model SEPMS.Domain.Entities.Department
 
 @{
-    ViewData["Title"] = "New department";
+    ViewData["Title"] = "Edit department";
 }
 
 <div class="dept-hero">
     <div>
         <p class="dept-kicker">Organization</p>
-        <h1>New department</h1>
-        <p class="dept-sub">Add a department that employees can be assigned to.</p>
+        <h1>Edit department</h1>
+        <p class="dept-sub">Update details for @Model.DepartmentName.</p>
     </div>
     <a asp-action="Index" class="dept-btn dept-btn-ghost">Back to list</a>
 </div>
 
 <div class="dept-panel dept-panel-narrow">
     <div class="dept-panel-body">
-        <form asp-action="Create" method="post" class="dept-form">
+        <form asp-action="Edit" method="post" class="dept-form">
+            <input type="hidden" asp-for="DepartmentId" />
             <partial name="_DepartmentForm" />
             <div class="dept-form-actions">
-                <button type="submit" class="dept-btn dept-btn-primary">Save department</button>
+                <button type="submit" class="dept-btn dept-btn-primary">Save changes</button>
                 <a asp-action="Index" class="dept-btn dept-btn-outline">Cancel</a>
             </div>
         </form>

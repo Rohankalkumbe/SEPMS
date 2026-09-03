@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="SEPMS.csproj" />
+  <Project Path="SEPMS.Domain\SEPMS.Domain.csproj" />
+  <Project Path="SEPMS.Application\SEPMS.Application.csproj" />
+  <Project Path="SEPMS.Infrastructure\SEPMS.Infrastructure.csproj" />
 </Solution>

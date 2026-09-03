@@ -1,0 +1,49 @@
+@model ListQuery
+
+<div class="dept-pager">
+    <p class="dept-pager-meta">
+        @if (Model.TotalCount == 0)
+        {
+            <span>No results</span>
+        }
+        else
+        {
+            <span>Showing @Model.FromItem–@Model.ToItem of @Model.TotalCount</span>
+        }
+    </p>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="dept-pager-links" aria-label="Pagination">
+            @if (Model.Page > 1)
+            {
+                <a class="dept-btn dept-btn-outline dept-btn-sm" asp-action="Index" asp-all-route-data="Model.Route(page: Model.Page - 1)">Previous</a>
+            }
+            else
+            {
+                <span class="dept-btn dept-btn-outline dept-btn-sm is-disabled">Previous</span>
+            }
+
+            @for (var i = Math.Max(1, Model.Page - 2); i <= Math.Min(Model.TotalPages, Model.Page + 2); i++)
+            {
+                if (i == Model.Page)
+                {
+                    <span class="dept-page is-current">@i</span>
+                }
+                else
+                {
+                    <a class="dept-page" asp-action="Index" asp-all-route-data="Model.Route(page: i)">@i</a>
+                }
+            }
+
+            @if (Model.Page < Model.TotalPages)
+            {
+                <a class="dept-btn dept-btn-outline dept-btn-sm" asp-action="Index" asp-all-route-data="Model.Route(page: Model.Page + 1)">Next</a>
+            }
+            else
+            {
+                <span class="dept-btn dept-btn-outline dept-btn-sm is-disabled">Next</span>
+            }
+        </nav>
+    }
+</div>

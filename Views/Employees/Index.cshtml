@@ -1,14 +1,14 @@
-﻿@model PagedResult<Department>
+@model PagedResult<Employee>
 
 @{
-    ViewData["Title"] = "Departments";
+    ViewData["Title"] = "Employees";
 }
 
 <div class="dept-hero">
     <div>
-        <p class="dept-kicker">Organization</p>
-        <h1>Departments</h1>
-        <p class="dept-sub">Manage the units employees belong to.</p>
+        <p class="dept-kicker">People</p>
+        <h1>Employees</h1>
+        <p class="dept-sub">Assign staff to departments and keep their contact details up to date.</p>
     </div>
     <div class="dept-hero-actions">
         <div class="dept-metrics">
@@ -21,7 +21,7 @@
                 <span>Active</span>
             </div>
         </div>
-        <a asp-action="Create" class="dept-btn dept-btn-primary">New department</a>
+        <a asp-action="Create" class="dept-btn dept-btn-primary">New employee</a>
     </div>
 </div>
 
@@ -34,12 +34,16 @@
     <input type="hidden" name="sort" value="@Model.Sort" />
     <input type="hidden" name="dir" value="@Model.Dir" />
 
-    <input class="form-control" type="search" name="search" value="@Model.Search" placeholder="Search name, code, or description" />
+    <input class="form-control" type="search" name="search" value="@Model.Search" placeholder="Search name, email, phone, or title" />
 
     <select class="form-control" name="status">
         <option value="all" selected="@(Model.Status == "all")">All statuses</option>
         <option value="active" selected="@(Model.Status == "active")">Active</option>
         <option value="inactive" selected="@(Model.Status == "inactive")">Inactive</option>
+    </select>
+
+    <select class="form-control" name="departmentId" asp-items="ViewBag.FilterDepartments">
+        <option value="">All departments</option>
     </select>
 
     <select class="form-control" name="pageSize">
@@ -56,15 +60,15 @@
     @if (Model.TotalInDatabase == 0)
     {
         <div class="dept-empty">
-            <h2>No departments yet</h2>
-            <p>Create the first department to start organizing employees.</p>
-            <a asp-action="Create" class="dept-btn dept-btn-primary">New department</a>
+            <h2>No employees yet</h2>
+            <p>Create an employee and link them to a department.</p>
+            <a asp-action="Create" class="dept-btn dept-btn-primary">New employee</a>
         </div>
     }
     else if (!Model.Items.Any())
     {
         <div class="dept-empty">
-            <h2>No matching departments</h2>
+            <h2>No matching employees</h2>
             <p>Try a different search or clear the filters.</p>
             <a asp-action="Index" class="dept-btn dept-btn-outline">Clear filters</a>
         </div>
@@ -76,22 +80,25 @@
                 <thead>
                     <tr>
                         <partial name="_SortHeading" model='("Name", "name", (ListQuery)Model)' />
-                        <partial name="_SortHeading" model='("Code", "code", (ListQuery)Model)' />
-                        <th>Description</th>
+                        <partial name="_SortHeading" model='("Email", "email", (ListQuery)Model)' />
+                        <partial name="_SortHeading" model='("Phone", "phone", (ListQuery)Model)' />
+                        <partial name="_SortHeading" model='("Department", "department", (ListQuery)Model)' />
+                        <partial name="_SortHeading" model='("Title", "title", (ListQuery)Model)' />
                         <partial name="_SortHeading" model='("Status", "status", (ListQuery)Model)' />
-                        <partial name="_SortHeading" model='("Created", "created", (ListQuery)Model)' />
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var department in Model.Items)
+                    @foreach (var employee in Model.Items)
                     {
                         <tr>
-                            <td class="dept-name">@department.DepartmentName</td>
-                            <td><span class="dept-code">@department.DepartmentCode</span></td>
-                            <td class="dept-desc">@(string.IsNullOrWhiteSpace(department.Description) ? "—" : department.Description)</td>
+                            <td class="dept-name">@employee.Name</td>
+                            <td>@employee.Email</td>
+                            <td>@(string.IsNullOrWhiteSpace(employee.Phone) ? "—" : employee.Phone)</td>
+                            <td>@(employee.Department?.DepartmentName ?? "—")</td>
+                            <td class="dept-desc">@employee.JobTitle</td>
                             <td>
-                                @if (department.IsActive)
+                                @if (employee.IsActive)
                                 {
                                     <span class="dept-pill dept-pill-on">Active</span>
                                 }
@@ -100,11 +107,10 @@
                                     <span class="dept-pill dept-pill-off">Inactive</span>
                                 }
                             </td>
-                            <td>@department.CreatedDate.ToString("dd MMM yyyy")</td>
                             <td>
                                 <div class="dept-actions">
-                                    <a asp-action="Edit" asp-route-id="@department.DepartmentId" class="dept-btn dept-btn-outline dept-btn-sm">Edit</a>
-                                    <a asp-action="Delete" asp-route-id="@department.DepartmentId" class="dept-btn dept-btn-danger dept-btn-sm">Delete</a>
+                                    <a asp-action="Edit" asp-route-id="@employee.EmployeeId" class="dept-btn dept-btn-outline dept-btn-sm">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@employee.EmployeeId" class="dept-btn dept-btn-danger dept-btn-sm">Delete</a>
                                 </div>
                             </td>
                         </tr>
