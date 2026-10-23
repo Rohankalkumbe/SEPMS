@@ -1,0 +1,370 @@
+/* =========================================
+   SEPMS PRIVACY PAGE
+   ========================================= */
+
+.privacy-page {
+    padding-bottom: 40px;
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.privacy-hero {
+    background: #112f50;
+    border-radius: 22px;
+    padding: 38px;
+    margin-bottom: 26px;
+    color: white;
+    box-shadow: 0 8px 24px rgba(17, 47, 80, 0.12);
+}
+
+.privacy-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.privacy-eyebrow {
+    color: #6db5ff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.privacy-hero h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.privacy-hero p {
+    max-width: 680px;
+    margin: 0;
+    color: #d8e7f8;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   STAT CARDS
+   ========================================= */
+
+.privacy-stats {
+    display: flex;
+    gap: 16px;
+}
+
+.privacy-stat-card {
+    min-width: 150px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.privacy-stat-icon {
+    font-size: 27px;
+}
+
+.privacy-stat-card strong,
+.privacy-stat-card span {
+    display: block;
+}
+
+.privacy-stat-card strong {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.privacy-stat-card span {
+    color: #bcd2e8;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   CONTENT CARD
+   ========================================= */
+
+.privacy-card {
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(17, 47, 80, 0.05);
+}
+
+.privacy-card p {
+    color: #526477;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   SECTION HEADING
+   ========================================= */
+
+.privacy-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.privacy-section-heading span {
+    color: #438ddd;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+.privacy-section-heading h2 {
+    margin: 2px 0 0;
+    color: #142d49;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.privacy-section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3ff;
+    font-size: 22px;
+}
+
+
+/* =========================================
+   DATA GRID
+   ========================================= */
+
+.privacy-data-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.privacy-data-item {
+    border: 1px solid #e1e8f0;
+    border-radius: 13px;
+    padding: 18px;
+    background: #f8fafc;
+}
+
+.privacy-data-item strong {
+    display: block;
+    color: #173653;
+    margin-bottom: 5px;
+}
+
+.privacy-data-item span {
+    color: #708093;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   NUMBERED LIST
+   ========================================= */
+
+.privacy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.privacy-list-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    border: 1px solid #e3e9f0;
+    border-radius: 12px;
+    padding: 15px 18px;
+}
+
+.privacy-list-item > span {
+    min-width: 35px;
+    font-weight: 800;
+    color: #438ddd;
+}
+
+.privacy-list-item p {
+    margin: 0;
+}
+
+
+/* =========================================
+   SECURITY
+   ========================================= */
+
+.privacy-security-card {
+    border-left: 5px solid #438ddd;
+}
+
+
+/* =========================================
+   RESPONSIBILITIES
+   ========================================= */
+
+.privacy-responsibilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.privacy-responsibilities > div {
+    padding: 20px;
+    border-radius: 13px;
+    background: #f6f9fc;
+    border: 1px solid #e1e8f0;
+}
+
+.privacy-responsibilities strong {
+    color: #173653;
+}
+
+.privacy-responsibilities p {
+    margin: 8px 0 0;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CONTACT
+   ========================================= */
+
+.privacy-contact {
+    background: #112f50;
+    color: white;
+
+    border-radius: 18px;
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 25px;
+}
+
+.privacy-contact span {
+    color: #6db5ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.privacy-contact h2 {
+    margin: 5px 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.privacy-contact p {
+    margin: 0;
+    color: #c9d9e9;
+}
+
+.privacy-contact-badge {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2d7fe0;
+
+    font-weight: 900;
+    font-size: 18px;
+}
+
+
+/* =========================================
+   LAST UPDATED
+   ========================================= */
+
+.privacy-last-updated {
+    text-align: center;
+    color: #758598;
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .privacy-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .privacy-stats {
+        width: 100%;
+    }
+
+    .privacy-data-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .privacy-responsibilities {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .privacy-hero {
+        padding: 25px;
+    }
+
+    .privacy-hero h1 {
+        font-size: 30px;
+    }
+
+    .privacy-stats {
+        flex-direction: column;
+    }
+
+    .privacy-stat-card {
+        width: 100%;
+    }
+
+    .privacy-card {
+        padding: 22px;
+    }
+
+    .privacy-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .privacy-contact {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}

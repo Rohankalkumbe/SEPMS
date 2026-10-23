@@ -1,7 +1,436 @@
-﻿
+﻿@model SEPMS.Models.HomeViewModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dashboard";
+    ViewData["PageTheme"] = "org";
+    ViewData["CurrentNav"] = "home";
 }
 
-<h1>Index</h1>
+<div class="home-page">
 
+    <!-- ==========================================
+         DASHBOARD HERO
+         ========================================== -->
+
+    <section class="home-hero">
+
+        <div class="home-hero-content">
+
+            <div>
+
+                <div class="home-eyebrow">
+                    SEPMS DASHBOARD
+                </div>
+
+                <h1>
+                    Staff & Employee
+                    <br />
+                    Profile Management
+                </h1>
+
+                <p>
+                    Manage employees, departments and organizational
+                    records from one simple management system.
+                </p>
+
+            </div>
+
+
+            <div class="home-hero-action">
+
+                <a asp-controller="Employees"
+                   asp-action="Create"
+                   class="home-primary-button">
+
+                    + New Employee
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         DASHBOARD STATISTICS
+         ========================================== -->
+
+    <section class="home-stats">
+
+        <!-- Employees -->
+
+        <div class="home-stat-card">
+
+            <div class="home-stat-icon">
+                👥
+            </div>
+
+            <div>
+
+                <span class="home-stat-label">
+                    EMPLOYEES
+                </span>
+
+                <strong>
+                    @Model.TotalEmployees
+                </strong>
+
+                <small>
+                    Total employees
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Departments -->
+
+        <div class="home-stat-card">
+
+            <div class="home-stat-icon">
+                🏢
+            </div>
+
+            <div>
+
+                <span class="home-stat-label">
+                    DEPARTMENTS
+                </span>
+
+                <strong>
+                    @Model.TotalDepartments
+                </strong>
+
+                <small>
+                    Total departments
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Active -->
+
+        <div class="home-stat-card">
+
+            <div class="home-stat-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <span class="home-stat-label">
+                    ACTIVE
+                </span>
+
+                <strong>
+                    @Model.ActiveEmployees
+                </strong>
+
+                <small>
+                    Active employees
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Inactive -->
+
+        <div class="home-stat-card">
+
+            <div class="home-stat-icon">
+                ○
+            </div>
+
+            <div>
+
+                <span class="home-stat-label">
+                    INACTIVE
+                </span>
+
+                <strong>
+                    @Model.InactiveEmployees
+                </strong>
+
+                <small>
+                    Inactive employees
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         QUICK ACTIONS
+         ========================================== -->
+
+    <section class="home-section">
+
+        <div class="home-section-header">
+
+            <div>
+
+                <span>
+                    QUICK ACTIONS
+                </span>
+
+                <h2>
+                    Manage Your Organization
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-management-grid">
+
+
+            <!-- EMPLOYEE MANAGEMENT -->
+
+            <div class="home-management-card">
+
+                <div class="home-management-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h3>
+                        Employee Management
+                    </h3>
+
+                    <p>
+                        Create, update, view and manage employee
+                        profiles and department assignments.
+                    </p>
+
+                </div>
+
+
+                <div class="home-card-actions">
+
+                    <a asp-controller="Employees"
+                       asp-action="Index"
+                       class="home-outline-button">
+
+                        View Employees
+
+                    </a>
+
+                    <a asp-controller="Employees"
+                       asp-action="Create"
+                       class="home-link-button">
+
+                        + Add Employee
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEPARTMENT MANAGEMENT -->
+
+            <div class="home-management-card">
+
+                <div class="home-management-icon">
+                    🏢
+                </div>
+
+                <div>
+
+                    <h3>
+                        Department Management
+                    </h3>
+
+                    <p>
+                        Manage departments, department codes,
+                        descriptions and active status.
+                    </p>
+
+                </div>
+
+
+                <div class="home-card-actions">
+
+                    <a asp-controller="Department"
+                       asp-action="Index"
+                       class="home-outline-button">
+
+                        View Departments
+
+                    </a>
+
+                    <a asp-controller="Department"
+                       asp-action="Create"
+                       class="home-link-button">
+
+                        + Add Department
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         SYSTEM FEATURES
+         ========================================== -->
+
+    <section class="home-section">
+
+        <div class="home-section-header">
+
+            <div>
+
+                <span>
+                    SYSTEM FEATURES
+                </span>
+
+                <h2>
+                    Everything You Need
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-features-grid">
+
+
+            <div class="home-feature-card">
+
+                <div class="home-feature-number">
+                    01
+                </div>
+
+                <h3>
+                    Employee Profiles
+                </h3>
+
+                <p>
+                    Maintain employee names, contact details,
+                    job titles and joining dates.
+                </p>
+
+            </div>
+
+
+            <div class="home-feature-card">
+
+                <div class="home-feature-number">
+                    02
+                </div>
+
+                <h3>
+                    Department Assignment
+                </h3>
+
+                <p>
+                    Assign employees to departments and maintain
+                    organizational structure.
+                </p>
+
+            </div>
+
+
+            <div class="home-feature-card">
+
+                <div class="home-feature-number">
+                    03
+                </div>
+
+                <h3>
+                    Search & Filters
+                </h3>
+
+                <p>
+                    Quickly find employees using search, department
+                    and active-status filters.
+                </p>
+
+            </div>
+
+
+            <div class="home-feature-card">
+
+                <div class="home-feature-number">
+                    04
+                </div>
+
+                <h3>
+                    Data Management
+                </h3>
+
+                <p>
+                    Create, edit and delete employee and department
+                    records with validation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         ABOUT SEPMS
+         ========================================== -->
+
+    <section class="home-about">
+
+        <div>
+
+            <span>
+                ABOUT SEPMS
+            </span>
+
+            <h2>
+                Staff & Employee Profile
+                Management System
+            </h2>
+
+            <p>
+                SEPMS provides a centralized platform for managing
+                employee and department information. It helps
+                organizations maintain accurate records and
+                efficiently manage their workforce.
+            </p>
+
+        </div>
+
+
+        <div class="home-about-badge">
+
+            <strong>
+                SEPMS
+            </strong>
+
+            <span>
+                MANAGEMENT
+            </span>
+
+        </div>
+
+    </section>
+
+
+</div>

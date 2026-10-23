@@ -59,5 +59,20 @@ namespace SEPMS.Application.Services
         }
 
         public IReadOnlyList<Department> GetDepartmentLookup() => _departments.GetLookup();
+
+        public async Task<int> GetTotalCountAsync()
+{
+    return await _employees.GetTotalCountAsync();
+}
+
+public async Task<int> GetActiveCountAsync()
+{
+    return await _employees.GetActiveCountAsync();
+}
+
+public async Task<int> GetInactiveCountAsync()
+{
+    return await _employees.GetInactiveCountAsync();
+}
     }
 }

@@ -101,5 +101,25 @@ namespace SEPMS.Infrastructure.Persistence.Repositories
             _context.Employees.Remove(employee);
             _context.SaveChanges();
         }
+
+
+// ========================================
+// DASHBOARD COUNT METHODS
+// ========================================
+
+public async Task<int> GetTotalCountAsync()
+{
+    return await _context.Employees.CountAsync();
+}
+
+public async Task<int> GetActiveCountAsync()
+{
+    return await _context.Employees.CountAsync(e => e.IsActive);
+}
+
+public async Task<int> GetInactiveCountAsync()
+{
+    return await _context.Employees.CountAsync(e => !e.IsActive);
+}
     }
 }

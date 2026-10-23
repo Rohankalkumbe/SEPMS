@@ -11,5 +11,11 @@ namespace SEPMS.Application.Abstractions
         void Add(Employee employee);
         void Update(Employee employee);
         void Delete(Employee employee);
+
+        Task<int> GetTotalCountAsync();
+
+        Task<int> GetActiveCountAsync();
+
+        Task<int> GetInactiveCountAsync();
     }
 }

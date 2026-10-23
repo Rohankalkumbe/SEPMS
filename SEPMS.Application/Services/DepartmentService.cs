@@ -6,51 +6,114 @@ namespace SEPMS.Application.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        private static readonly string[] SortColumns = ["name", "code", "status", "created"];
-        private readonly IDepartmentRepository _repository;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public DepartmentService(IDepartmentRepository repository)
+        public DepartmentService(IDepartmentRepository departmentRepository)
         {
-            _repository = repository;
+            _departmentRepository = departmentRepository;
         }
 
-        public PagedResult<Department> GetPaged(string? search, string? status, string? sort, string? dir, int page, int pageSize)
+        // ========================================
+        // GET PAGED DEPARTMENTS
+        // ========================================
+
+        public PagedResult<Department> GetPaged(
+            string? search,
+            string? status,
+            string? sort,
+            string? dir,
+            int page,
+            int pageSize)
         {
-            return _repository.GetPaged(ListQuery.Create(search, status, sort, dir, page, pageSize, SortColumns));
+            var query = new ListQuery
+            {
+                Search = search,
+                Status = status,
+                Sort = sort,
+                Dir = dir,
+                Page = page,
+                PageSize = pageSize
+            };
+
+            return _departmentRepository.GetPaged(query);
         }
 
-        public Department? GetById(int id) => _repository.GetById(id);
+        // ========================================
+        // GET DEPARTMENT BY ID
+        // ========================================
 
-        public void Create(Department department) => _repository.Add(department);
+        public Department? GetById(int id)
+        {
+            return _departmentRepository.GetById(id);
+        }
+
+        // ========================================
+        // CREATE DEPARTMENT
+        // ========================================
+
+        public void Create(Department department)
+        {
+            _departmentRepository.Add(department);
+        }
+
+        // ========================================
+        // UPDATE DEPARTMENT
+        // ========================================
 
         public bool Update(Department department)
         {
-            var existing = _repository.GetById(department.DepartmentId);
-            if (existing == null)
+            var existingDepartment =
+                _departmentRepository.GetById(department.DepartmentId);
+
+            if (existingDepartment == null)
             {
                 return false;
             }
 
-            existing.DepartmentName = department.DepartmentName;
-            existing.DepartmentCode = department.DepartmentCode;
-            existing.Description = department.Description;
-            existing.IsActive = department.IsActive;
-            _repository.Update(existing);
+            existingDepartment.DepartmentName = department.DepartmentName;
+            existingDepartment.DepartmentCode = department.DepartmentCode;
+            existingDepartment.Description = department.Description;
+            existingDepartment.IsActive = department.IsActive;
+
+            _departmentRepository.Update(existingDepartment);
+
             return true;
         }
 
+        // ========================================
+        // DELETE DEPARTMENT
+        // ========================================
+
         public bool Delete(int id)
         {
-            var department = _repository.GetById(id);
+            var department = _departmentRepository.GetById(id);
+
             if (department == null)
             {
                 return false;
             }
 
-            _repository.Delete(department);
+            _departmentRepository.Delete(department);
+
             return true;
         }
 
-        public IReadOnlyList<Department> GetLookup() => _repository.GetLookup();
+        // ========================================
+        // DEPARTMENT LOOKUP
+        // ========================================
+
+        public IReadOnlyList<Department> GetLookup()
+        {
+            return _departmentRepository.GetLookup();
+        }
+
+        // ========================================
+        // DASHBOARD - TOTAL DEPARTMENTS
+        // ========================================
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _departmentRepository.GetTotalCountAsync();
+        }
     }
 }

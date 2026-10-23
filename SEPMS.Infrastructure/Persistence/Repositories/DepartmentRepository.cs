@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SEPMS.Application.Abstractions;
 using SEPMS.Application.Common;
 using SEPMS.Domain.Entities;
@@ -88,5 +89,10 @@ namespace SEPMS.Infrastructure.Persistence.Repositories
 
         public IReadOnlyList<Department> GetLookup() =>
             _context.Departments.OrderBy(d => d.DepartmentName).ToList();
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _context.Departments.CountAsync();
+        }
     }
 }
